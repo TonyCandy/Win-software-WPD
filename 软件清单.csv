@@ -113,3 +113,9 @@ Microsoft Visual C++ 运行库,⚙️ 驱动/运行库,VC++ 运行库合集（20
 Sentinel 加密狗驱动,⚙️ 驱动/运行库,软件授权加密狗驱动,7.6.0,SafeNet,,,https://www.thalesgroup.com,https://www.thalesgroup.com,,,,
 NVIDIA App,⚙️ 驱动/运行库,NVIDIA 驱动管理/游戏优化,11.0.5.245,NVIDIA,,,https://www.nvidia.cn,https://www.nvidia.cn,,,,驱动管理/游戏优化
 DirectX 运行库,⚙️ 驱动/运行库,游戏多媒体运行库（WeGame 依赖）,Jun-10,Microsoft,,,https://www.microsoft.com,https://www.microsoft.com,,,,WeGame 依赖
+ArtCAM Pro 8.1,🎨 设计创作,Delcam 浮雕设计与 CNC 雕刻 CAM 经典老版,8.1,Delcam Plc,,,,,,,,已安装于 C:\Program Files (x86)\ArtCAM Pro 8.1，约 142 MB；需 USB 加密狗；Autodesk 已退市，官方不再提供
+ArtCAM 2008,🎨 设计创作,Delcam 浮雕设计与 CNC 雕刻 CAM,2008,Delcam Plc,,,,,,,,已安装于 D:\Program Files\ArtCAM 2008，约 1.0 GB；需 USB 加密狗；安装包 E:\BaiduNetdiskDownload\ArtCAM 2008.zip
+Delcam PS-Exchange,🎨 设计创作,Delcam 系列 CAD 数据交换模块（remove only 残留）,520105,Delcam Plc,,,,,,,,注册表残留卸载项，安装目录未找到
+SmartCUT Pro,🎨 设计创作,板材切割/开料优化软件,2.5.1,,,,,,,,,安装目录未找到；D:\Program Files\AnzhuangFile\smartcut 下有安装包残留
+Vectric Shell Extensions,🎨 设计创作,Vectric 软件资源管理器右键外壳扩展,1.2,Vectric,,,,,,,,随 Vectric Aspire 安装；Aspire 10.512 安装包在 D:\Program Files\AnzhuangFile\
+SoapToolkit30,🎨 设计创作,CAXA SOAP 工具包（CAXA 附带组件）,4.00.0000,CAXA,,,,,,,,随 CAXA 安装，约 2 MB
