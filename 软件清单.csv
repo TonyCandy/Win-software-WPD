@@ -1,0 +1,115 @@
+﻿软件名称,分类,用途说明,版本,厂商,安装方式,优先级,官网,下载地址1,下载地址2,下载地址3,图标,备注
+百度网盘,📄 办公效率,大文件云存储与下载分享,8.5.5,百度,,必备,https://pan.baidu.com,https://pan.baidu.com,,,,
+WPS Office,📄 办公效率,办公套件：文档/表格/演示，国产 Office,12.1.0.28488,Kingsoft,,必备,https://www.wps.com,https://www.wps.com,,,,
+三维家,📄 办公效率,板式家具设计拆单软件,3.5.6.0,广东三维家,,,https://www.3vjia.com,https://www.3vjia.com,,,,
+阿里云盘,📄 办公效率,不限速云盘，存储与分享,6.9.3,阿里,,必备,https://www.alipan.com,https://www.alipan.com,,,,
+方方格子,📄 办公效率,Excel/WPS 表格功能增强插件,3.2.6.0,FFCell,,,https://www.ffcell.com,https://www.ffcell.com,,,,WPS/Excel 表格增强插件
+VSTO 环境安装包,📄 办公效率,Office 加载项运行环境,3,FFCell,,,,,,,,随方方格子安装
+FastPDF/FastPic,📄 办公效率,PDF/图片快捷处理工具,,,,,,,,,,
+CAXA CAD 电子图板,📄 办公效率,国产二维 CAD 制图软件,2024,北京数码大方,,,https://www.caxa.com,https://www.caxa.com,,,,曾用 2021 版
+FreeFileSync,🔧 系统工具,文件夹双向同步与备份,14.8,FreeFileSync.org,,,https://freefilesync.org,https://freefilesync.org,,,,
+SyncTrayzor,🔧 系统工具,微软 SyncToy 托盘图形界面,2.2.0.0,SyncTrayzor,,,https://github.com/canton7/SyncTrayzor,https://github.com/canton7/SyncTrayzor,,,,微软 SyncToy 的托盘图形界面
+大辞典,📄 办公效率,中文词典查询（绿色单文件）,,,绿色免安装,,,,,,,绿色单文件
+文档转换,📄 办公效率,文档格式转换（绿色单文件）,,,绿色免安装,,,,,,,绿色单文件
+PDF 编辑,📄 办公效率,PDF 编辑（绿色单文件）,,,绿色免安装,,,,,,,绿色单文件
+PDF 转换,📄 办公效率,PDF 格式转换（绿色单文件）,,,绿色免安装,,,,,,,绿色单文件
+屏幕 OCR 识别（天若 OCR）,📄 办公效率,屏幕文字识别提取（绿色版）,,,绿色免安装,,,,,,,
+常用绿色小工具集,📄 办公效率,翻译/语音计算器/文本替换/批量更名/文件管理/打字练习,,,绿色免安装,,,,,,,翻译/计算器/批量更名等
+FileRenamer,📄 办公效率,批量文件重命名（便携单文件）,,,绿色免安装,,,https://github.com/TonyCandy/FileRenamer,,,,批量重命名（便携单文件）
+NVIDIA CUDA Toolkit,💻 开发编程,GPU 并行计算开发工具包,13,NVIDIA,,,https://developer.nvidia.com/cuda-toolkit,https://developer.nvidia.com/cuda-toolkit,,,,曾装 12.2，如需旧版可另装
+Trae CN,💻 开发编程,字节跳动 AI 编程 IDE,3.3.104,字节跳动,,,https://www.trae.com.cn,https://www.trae.com.cn,,,,
+NVIDIA Nsight 开发组件,💻 开发编程,GPU 性能分析与调试工具,2023/2025,NVIDIA,,,https://developer.nvidia.com/nsight,https://developer.nvidia.com/nsight,,,,Systems/Compute/VS 版
+Qoder,💻 开发编程,AI 编程助手：代码生成与问答,0.4.3,Qoder,,,https://qoder.ai,https://qoder.ai,,,,AI 编程助手
+Git,💻 开发编程,分布式版本控制工具,,,,,https://git-scm.com,https://git-scm.com,,,,
+Java 8 JRE,💻 开发编程,Java 运行环境,8.0.1720.11,Oracle,,,https://www.java.com,https://www.java.com,,,,
+AIWrite,💻 开发编程,AI 写作辅助工具,2.1.5,,,,,,,,,AI 写作
+Python,💻 开发编程,Python 解释器,3.13,Python Software Foundation,,,https://www.python.org,https://www.python.org,,,,
+Node.js,💻 开发编程,JavaScript 运行时,,,,,https://nodejs.org,https://nodejs.org,,,,
+Android 平台工具（adb/fastboot）,💻 开发编程,Android 调试与刷机工具,,,,,https://developer.android.com/tools,https://developer.android.com/tools,,,,
+VBA 7.1,💻 开发编程,Office 宏编程运行环境,7.1.11.05,Microsoft,,,https://www.microsoft.com,https://www.microsoft.com,,,,Office 宏环境
+VSTO 10.0 Runtime,💻 开发编程,Office 加载项运行库,10.0.60922,Microsoft,,,https://www.microsoft.com,https://www.microsoft.com,,,,Office 加载项运行库
+JDK 11,💻 开发编程,Java 开发工具包,11.0.14.0,Oracle,,,https://www.oracle.com/java,https://www.oracle.com/java,,,,
+万能终端,💻 开发编程,多功能终端工具（绿色单文件）,,,绿色免安装,,,,,,,绿色单文件
+8uftp,💻 开发编程,轻量 FTP 客户端（便携单文件）,,,绿色免安装,,,,,,,便携 FTP 客户端
+Siemens NX 2406,🎨 设计创作,高端三维 CAD/CAM/CAE 设计软件,,,,,https://www.plm.automation.siemens.com,https://www.plm.automation.siemens.com,,,,
+SolidLink,🎨 设计创作,Hexagon CAD 套件数据链接组件,2023.1 / 2025.1,Hexagon,,,https://www.hexagon.com,https://www.hexagon.com,,,,
+ALPHACAM,🎨 设计创作,数控加工编程 CAM 软件,2025,Hexagon,,,https://www.hexagon.com,https://www.hexagon.com,,,,
+NCSIMUL,🎨 设计创作,数控加工仿真与验证,2025.1.0,Hexagon,,,https://www.ncsimul.com,https://www.ncsimul.com,,,,2023.1 曾用
+CIMCO Edit,🎨 设计创作,CNC 程序编辑与通信工具,2022.00.63,CIMCO,,,https://www.cimco.com,https://www.cimco.com,,,,
+QuickCAM,🎨 设计创作,数控加工 CAM 编程软件,,Delcam,,,https://www.autodesk.com,https://www.autodesk.com,,,,数控 CAM
+Adobe Photoshop,🎨 设计创作,图像处理与设计,CC 2022 / CS5 绿色版,Adobe,,,https://www.adobe.com,https://www.adobe.com,,,,安装版与绿色版并存
+Solid Edge 2D Nesting,🎨 设计创作,二维板材套料排版,2023,Siemens,,,https://solidedge.siemens.com,https://solidedge.siemens.com,,,,
+Teigha File Converter,🎨 设计创作,CAD 文件格式转换工具,,,,,https://www.opendesign.com,https://www.opendesign.com,,,,
+NCVIEWER,🎨 设计创作,数控程序查看器,5.2.0.0,,,,,,,,,数控程序查看器
+AutoCAD 2024,🎨 设计创作,二维/三维通用制图软件,2024.1.2,Autodesk,,,https://www.autodesk.com.cn,https://www.autodesk.com.cn,,,,
+CAP工具箱,🎨 设计创作,NX 辅助工具与许可服务,4.5.07.15,Capful,,,,,,,,NX 辅助工具及许可服务
+剪映专业版,🎨 设计创作,视频剪辑软件,,,,,https://www.jianying.com,https://www.jianying.com,,,,
+Movavi Video Editor,🎨 设计创作,视频剪辑与特效软件,23,Movavi,,,https://www.movavi.com,https://www.movavi.com,,,,
+图片处理工具,🎨 设计创作,图片处理（绿色单文件）,,,绿色免安装,,,,,,,绿色单文件
+pyvideotrans,🎬 影音娱乐,AI 视频翻译/配音/字幕,4.11,jianchang512,,,https://github.com/jianchang512/pyvideotrans,https://github.com/jianchang512/pyvideotrans,,,,AI 视频翻译/配音/字幕，含 win 打包版
+SmartSub,🎬 影音娱乐,AI 字幕翻译与压制,3.8.0,buxuku,,,https://github.com/buxuku/SmartSub,https://github.com/buxuku/SmartSub,,,,AI 字幕翻译，模型/缓存较大
+LosslessCut,🎬 影音娱乐,无损视频剪切/合并,3.65.0,mifi,,,https://github.com/mifi/lossless-cut,https://github.com/mifi/lossless-cut,,,,
+PotPlayer,🎬 影音娱乐,万能视频播放器,1.7.22398,DAUM/Kakao,,必备,https://potplayer.daum.net,https://potplayer.daum.net,,,,
+AudioRelay,🎬 影音娱乐,电脑音频串流到手机,0.27.5,Asapha Halifa,,,https://audiorelay.net,https://audiorelay.net,,,,
+Audacity,🎬 影音娱乐,音频录制与编辑,,,,,https://www.audacityteam.org,https://www.audacityteam.org,,,,
+FormatFactory（格式工厂）,🎬 影音娱乐,音视频格式转换,5.21.0.0,FreeTime,,,http://www.pcfreetime.com,http://www.pcfreetime.com,,,,绿色版曾用
+FFmpegFreeUI,🎬 影音娱乐,FFmpeg 图形化封装工具,,,,,,,,,,
+HandBrake,🎬 影音娱乐,视频转码与压缩,,,,,https://handbrake.fr,https://handbrake.fr,,,,
+VLC,🎬 影音娱乐,开源全能媒体播放器,,,,,https://www.videolan.org,https://www.videolan.org,,,,
+MPC-HC,🎬 影音娱乐,轻量视频播放器（绿色版）,,clsid2,绿色免安装,,https://github.com/clsid2/mpc-hc,https://github.com/clsid2/mpc-hc,,,,绿色版
+2345看图王,🎬 影音娱乐,图片查看与管理,,2345,,,https://pic.2345.cc,https://pic.2345.cc,,,,
+影音小工具集,🎬 影音娱乐,在线音乐/屏幕录制（绿色单文件）,,,绿色免安装,,,,,,,在线音乐/录屏（绿色单文件）
+360杀毒,🛡 安全防护,免费杀毒防护软件,7.0.0.1060,360 安全中心,,,https://sd.360.cn,https://sd.360.cn,,,,
+搜狗输入法,🔧 系统工具,中文拼音输入法,16.6.0.4952,Sogou,,必备,https://shurufa.sogou.com,https://shurufa.sogou.com,,,,
+图吧工具箱,🔧 系统工具,硬件检测/测试/维修工具合集,2024.09,图吧,,,https://www.tbtool.cn,https://www.tbtool.cn,,,,
+Concat,🔧 系统工具,文件快速合并工具,0.2.1,,,,,,,,,文件合并工具
+FileMenuTools,🔧 系统工具,右键菜单增强工具,,,,,https://www.lopesoft.com,https://www.lopesoft.com,,,,
+RaiDrive,🔧 系统工具,网盘/远程存储挂载为本地磁盘,,,,,https://www.raidrive.com,https://www.raidrive.com,,,,
+黑科技工具箱,🔧 系统工具,系统优化/小工具合集,,,,,,,,,,
+WinRAR,🔧 系统工具,压缩与解压软件,7.01,win.rar GmbH,,必备,https://www.win-rar.com,https://www.win-rar.com,,,,
+Microsoft Sync Framework 2.0,⚙️ 驱动/运行库,文件同步框架（随 SyncToy）,2.0.1578.0,Microsoft,,,https://www.microsoft.com,https://www.microsoft.com,,,,随 SyncToy 安装
+Everything,🔧 系统工具,极速文件名搜索,1.4.1.1032,voidtools,,必备,https://www.voidtools.com,https://www.voidtools.com,,,,
+QTTabBar,🔧 系统工具,资源管理器多标签页,1.5.6.1,indiff,,,https://github.com/indiff/qttabbar,https://github.com/indiff/qttabbar,,,,
+WinFsp 2025,⚙️ 驱动/运行库,用户态文件系统驱动（RaiDrive 依赖）,,,,,https://winfsp.dev,https://winfsp.dev,,,,
+Microsoft Update Health Tools,⚙️ 驱动/运行库,Windows 更新健康组件,3.74.0.0,Microsoft,,,https://www.microsoft.com,https://www.microsoft.com,,,,系统组件
+Clover,🔧 系统工具,资源管理器多标签页,3.5.6.11206,易捷科技,,,http://cn.ejie.me,http://cn.ejie.me,,,,
+雷电模拟器9,🎮 游戏,安卓模拟器（手游/应用）,9.0.26,深圳易大师科技,,,https://www.ldmnq.com,https://www.ldmnq.com,,,,旧版 LDPlayer 目录残留
+UU远程,🔧 系统工具,网易远程控制工具,4.41.0.2311,Netease,,,https://uu.163.com,https://uu.163.com,,,,远程控制
+向日葵远程控制,🔧 系统工具,远程桌面控制,,,,,https://sunlogin.oray.com,https://sunlogin.oray.com,,,,
+尘雨工具箱,🔧 系统工具,硬件工具合集（鲁大师/驱动/分区等）,,尘雨,,,,,,,,硬件工具合集
+DiskGenius,🔧 系统工具,磁盘分区与数据恢复,,,,,https://www.diskgenius.cn,https://www.diskgenius.cn,,,,分区工具
+FastCopy,🔧 系统工具,高速文件复制（绿色版）,,,绿色免安装,,https://fastcopy.jp,https://fastcopy.jp,,,,高速复制（绿色版）
+ventoy,🔧 系统工具,多系统启动盘制作工具,1.0.99,,,,https://www.ventoy.net,https://www.ventoy.net,,,,启动盘工具
+系统小工具集,🔧 系统工具,数据恢复/虚拟光驱/解锁文件占用/截图（绿色单文件）,,,绿色免安装,,,,,,,数据恢复/虚拟光驱/解锁/截图
+迅雷,🌐 浏览器/网络,高速下载工具（支持 BT/磁力）,25.1.20.1642,迅雷网络,,,https://www.xunlei.com,https://www.xunlei.com,,,,旧版 12.4 曾用
+Microsoft Edge,🌐 浏览器/网络,系统自带浏览器,154.0.4258.53,Microsoft,,,https://www.microsoft.com/edge,https://www.microsoft.com/edge,,,,系统自带
+Microsoft Edge WebView2 Runtime,⚙️ 驱动/运行库,Edge 内核运行时组件（许多应用依赖）,154.0.4258.53,Microsoft,,,https://developer.microsoft.com/microsoft-edge/webview2,https://developer.microsoft.com/microsoft-edge/webview2,,,,
+v2rayN,🌐 浏览器/网络,代理客户端（V2Ray 图形界面）,7.18.0.0,GitHub 开源,,,https://github.com/2dust/v2rayN,https://github.com/2dust/v2rayN,,,,
+Clash Verge,🌐 浏览器/网络,Clash 代理客户端（规则分流）,,,,,https://github.com/clash-verge-rev/clash-verge-rev,https://github.com/clash-verge-rev/clash-verge-rev,,,,
+FileZilla,🌐 浏览器/网络,FTP/SFTP 客户端,3.70.6,Tim Kosse,,,https://filezilla-project.org,https://filezilla-project.org,,,,
+Streamlink,🌐 浏览器/网络,命令行直播流下载,,,,,https://streamlink.github.io,https://streamlink.github.io,,,,
+Internet Download Manager,🌐 浏览器/网络,多线程下载管理器,6.43.10,Tonec,,,https://www.internetdownloadmanager.com,https://www.internetdownloadmanager.com,,,,
+CentBrowser,🌐 浏览器/网络,谷歌内核双核浏览器（绿色版）,,,绿色免安装,,https://www.centbrowser.com,https://www.centbrowser.com,,,,谷歌内核双核浏览器
+qBittorrent,🌐 浏览器/网络,开源 BT 下载工具,,,,,https://www.qbittorrent.org,https://www.qbittorrent.org,,,,BT 下载
+OneDrive,🌐 浏览器/网络,微软云同步盘,25.238.1204.0001,Microsoft,,,https://www.microsoft.com/microsoft-365/onedrive,https://www.microsoft.com/microsoft-365/onedrive,,,,系统预装
+飞书,💬 通讯社交,办公协作平台（IM/文档/会议）,,,,必备,https://www.feishu.cn,https://www.feishu.cn,,,,
+QQ,💬 通讯社交,腾讯即时通讯,9.9.22.40111,腾讯,,必备,https://im.qq.com,https://im.qq.com,,,,
+微信,💬 通讯社交,腾讯社交聊天,4.1.15.13,腾讯,,必备,https://weixin.qq.com,https://weixin.qq.com,,,,当前为 4.1 测试版；旧版 3.9 数据目录 D:\Documents\WeChat Files
+豆包,💻 开发编程,字节跳动 AI 助手客户端,,,,,https://www.doubao.com,https://www.doubao.com,,,,
+Telegram,💬 通讯社交,海外加密即时通讯,5.9,Telegram FZ-LLC,,,https://telegram.org,https://telegram.org,,,,
+豆包工作,💻 开发编程,豆包工作客户端（桌面端）,2.25.18,字节跳动,,,https://www.doubao.com,https://www.doubao.com,,,,
+英雄联盟,🎮 游戏,MOBA 网游（WeGame 版）,,腾讯,,,https://www.wegame.com.cn,https://www.wegame.com.cn,,,,WeGame 版
+无畏契约,🎮 游戏,FPS 网游（国服）,,,,,https://www.wegame.com.cn,https://www.wegame.com.cn,,,,
+无畏契约助手,🎮 游戏,无畏契约辅助工具,,腾讯 WeGame,,,,,,,,无畏契约辅助工具
+WeGame 平台,🎮 游戏,腾讯游戏平台/启动器,,,,,https://www.wegame.com.cn,https://www.wegame.com.cn,,,,
+Epic Games Launcher,🎮 游戏,Epic 游戏平台/启动器,,Epic Games,,,https://store.epicgames.com,https://store.epicgames.com,,,,含 Epic Online Services
+NVIDIA cuDNN,⚙️ 驱动/运行库,GPU 深度学习加速库,9.13,NVIDIA,,,https://developer.nvidia.com/cudnn,https://developer.nvidia.com/cudnn,,,,
+Microsoft .NET Runtime,⚙️ 驱动/运行库,NET 运行库（6.0/8.0）,6.0.28 / 8.0.22,Microsoft,,,https://dotnet.microsoft.com,https://dotnet.microsoft.com,,,,多版本运行库
+NVIDIA PhysX,⚙️ 驱动/运行库,物理引擎系统软件,9.23.1019,NVIDIA,,,https://www.nvidia.cn,https://www.nvidia.cn,,,,
+Canon MF Scan Utility,⚙️ 驱动/运行库,佳能打印机扫描驱动/工具,,,,,https://www.canon.com.cn,https://www.canon.com.cn,,,,
+Microsoft .NET Framework,⚙️ 驱动/运行库,NET Framework 运行框架,1.1,Microsoft,,,https://dotnet.microsoft.com,https://dotnet.microsoft.com,,,,含 SP1/语言包/安全更新
+NVIDIA 显卡驱动,⚙️ 驱动/运行库,NVIDIA 显卡驱动程序,581.29,NVIDIA,,,https://www.nvidia.cn/drivers,https://www.nvidia.cn/drivers,,,,驱动套件含遥测/Container/HD 音频等约 30 个组件；旧驱动 566.36 曾用
+Microsoft Visual C++ 运行库,⚙️ 驱动/运行库,VC++ 运行库合集（2005-2022）,2005-2022,Microsoft,,,https://learn.microsoft.com/cpp,https://learn.microsoft.com/cpp,,,,全系列运行库合集
+Sentinel 加密狗驱动,⚙️ 驱动/运行库,软件授权加密狗驱动,7.6.0,SafeNet,,,https://www.thalesgroup.com,https://www.thalesgroup.com,,,,
+NVIDIA App,⚙️ 驱动/运行库,NVIDIA 驱动管理/游戏优化,11.0.5.245,NVIDIA,,,https://www.nvidia.cn,https://www.nvidia.cn,,,,驱动管理/游戏优化
+DirectX 运行库,⚙️ 驱动/运行库,游戏多媒体运行库（WeGame 依赖）,Jun-10,Microsoft,,,https://www.microsoft.com,https://www.microsoft.com,,,,WeGame 依赖

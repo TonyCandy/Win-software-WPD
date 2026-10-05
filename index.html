@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>软件清单导航</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%234f46e5'/%3E%3Cpath d='M9 11h14M9 16h14M9 21h9' stroke='%23fff' stroke-width='2.4' stroke-linecap='round'/%3E%3C/svg%3E">
+<script defer src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+<style>
+:root{
+  --bg:#fafafa; --panel:#ffffff; --border:#e7e7e7; --border-soft:#f0f0f0;
+  --text:#18181b; --muted:#6b7280; --faint:#9ca3af;
+  --accent:#4f46e5; --accent-soft:#eef2ff; --accent-text:#3730a3;
+  --shadow:0 1px 2px rgba(0,0,0,.04), 0 2px 8px rgba(0,0,0,.05);
+  --hover:rgba(0,0,0,.03);
+  --radius:10px;
+  --sb-w:300px; --top-h:60px;
+  --font:"Segoe UI","PingFang SC","Microsoft YaHei",system-ui,-apple-system,sans-serif;
+}
+[data-theme="dark"]{
+  --bg:#0f1012; --panel:#17181c; --border:#26282e; --border-soft:#202228;
+  --text:#e8e8ea; --muted:#9aa0a8; --faint:#6b7280;
+  --accent:#818cf8; --accent-soft:#232538; --accent-text:#a5b4fc;
+  --shadow:0 1px 2px rgba(0,0,0,.3), 0 2px 10px rgba(0,0,0,.25);
+  --hover:rgba(255,255,255,.045);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%}
+body{font-family:var(--font);background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased}
+button{font-family:inherit;background:none;border:none;cursor:pointer;color:inherit}
+a{color:inherit;text-decoration:none}
+
+/* ===== 侧边栏 ===== */
+.sidebar{
+  position:fixed;inset:0 auto 0 0;width:var(--sb-w);background:var(--panel);
+  border-right:1px solid var(--border);display:flex;flex-direction:column;z-index:40;transition:transform .25s ease;
+}
+.sidebar-logo{display:flex;align-items:center;gap:10px;height:var(--top-h);padding:0 18px;flex:none;border-bottom:1px solid var(--border-soft)}
+.sidebar-logo .logo-mark{width:30px;height:30px;border-radius:8px;background:linear-gradient(135deg,#6366f1,#8b5cf6);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:15px}
+.sidebar-logo .logo-text{font-size:15px;font-weight:700;letter-spacing:.3px}
+.sidebar-nav{flex:1;overflow-y:auto;padding:14px 12px 20px}
+.sidebar-nav .nav-title{font-size:11px;color:var(--faint);padding:6px 12px;letter-spacing:.8px;text-transform:uppercase}
+.nav-group{margin-bottom:6px}
+.nav-item{
+  display:flex;align-items:center;gap:11px;width:100%;padding:13px 14px;border-radius:9px;
+  font-size:15.5px;color:var(--muted);transition:background .15s,color .15s;text-align:left;
+}
+.nav-item:hover{background:var(--hover);color:var(--text)}
+.nav-item.active{background:var(--accent-soft);color:var(--accent-text);font-weight:600}
+.nav-item .cat-icon{font-size:17px;width:24px;text-align:center;flex:none}
+.nav-item .cat-count{margin-left:auto;font-size:12px;color:var(--faint);font-weight:400}
+.nav-item.active .cat-count{color:var(--accent)}
+.sidebar-foot{padding:12px 18px;border-top:1px solid var(--border-soft);font-size:11px;color:var(--faint);line-height:1.7;flex:none}
+
+/* ===== 主区域 ===== */
+.main-wrap{margin-left:var(--sb-w);min-height:100vh;display:flex;flex-direction:column}
+.topbar{
+  position:sticky;top:0;z-index:30;height:var(--top-h);background:var(--panel);
+  border-bottom:1px solid var(--border);display:flex;align-items:center;gap:14px;padding:0 20px;
+}
+.burger{display:none;width:38px;height:38px;border-radius:8px;align-items:center;justify-content:center;flex:none;color:var(--muted)}
+.burger:hover{background:var(--hover);color:var(--text)}
+.burger svg{width:20px;height:20px}
+.crumb{font-size:13px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.crumb b{color:var(--text);font-weight:600}
+.search-box{flex:1;max-width:480px;position:relative;margin-left:auto}
+.search-box svg{position:absolute;left:12px;top:50%;transform:translateY(-50%);width:16px;height:16px;color:var(--faint);pointer-events:none}
+.search-box input{
+  width:100%;height:38px;padding:0 38px 0 38px;border-radius:9px;border:1px solid var(--border);
+  background:var(--bg);color:var(--text);font-size:13.5px;outline:none;transition:border .15s,box-shadow .15s;
+}
+.search-box input:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+.search-box input::placeholder{color:var(--faint)}
+.search-clear{position:absolute;right:8px;top:50%;transform:translateY(-50%);display:none;width:24px;height:24px;border-radius:6px;color:var(--faint);align-items:center;justify-content:center}
+.search-clear:hover{background:var(--hover);color:var(--text)}
+.theme-btn{width:38px;height:38px;border-radius:9px;display:flex;align-items:center;justify-content:center;color:var(--muted);flex:none}
+.theme-btn:hover{background:var(--hover);color:var(--text)}
+.theme-btn svg{width:18px;height:18px}
+
+.content{padding:24px 28px 60px;max-width:1180px;width:100%;margin:0 auto}
+.page-head{display:flex;align-items:baseline;gap:12px;margin-bottom:18px}
+.page-head h1{font-size:20px;font-weight:700;letter-spacing:.2px}
+.page-head .stat{font-size:12.5px;color:var(--muted)}
+
+/* ===== 卡片网格 ===== */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(258px,1fr));gap:14px}
+@media (min-width:1300px){
+  .grid{grid-template-columns:repeat(4,1fr)}
+  .grid:has(> .card:last-child:nth-child(4n+1)) .card:last-child{grid-column:span 2}
+}
+.card{
+  background:var(--panel);border:1px solid var(--border);border-radius:var(--radius);padding:14px 15px;
+  box-shadow:var(--shadow);transition:border-color .15s,transform .15s,box-shadow .15s;position:relative;
+}
+.card:hover{border-color:#d4d4d8;box-shadow:0 4px 18px rgba(0,0,0,.07)}
+[data-theme="dark"] .card:hover{border-color:#3a3d45}
+.card-top{display:flex;align-items:center;gap:11px;min-width:0}
+.card-icon{width:38px;height:38px;border-radius:9px;flex:none;overflow:hidden;background:var(--border-soft);display:flex;align-items:center;justify-content:center;position:relative}
+.card-icon img{width:100%;height:100%;object-fit:contain;display:block}
+.card-icon .letter{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;color:#fff}
+.app-name{font-size:14.5px;font-weight:600;line-height:1.35;flex:1;min-width:0;cursor:pointer;word-break:break-word}
+.app-name:hover{color:var(--accent)}
+.card-desc{font-size:12.5px;color:var(--muted);line-height:1.55;margin-top:7px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.card-dl{margin-top:11px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.dl-btn{
+  display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:600;color:var(--accent-text);
+  background:var(--accent-soft);padding:5px 11px;border-radius:7px;transition:background .15s;
+}
+.dl-btn:hover{background:#e0e7ff}
+[data-theme="dark"] .dl-btn:hover{background:#2c2f45}
+.dl-btn svg{width:13px;height:13px}
+.card-prio{font-size:11px;color:var(--faint);border:1px solid var(--border);border-radius:5px;padding:2px 7px}
+.card-prio.must{color:#b45309;border-color:#fde68a;background:#fffbeb}
+[data-theme="dark"] .card-prio.must{color:#fbbf24;border-color:#574322;background:#2a2414}
+.more-dl{font-size:12px;color:var(--faint)}
+
+/* ===== 详情侧滑面板 ===== */
+.detail-mask{position:fixed;inset:0;background:rgba(15,16,18,.45);opacity:0;pointer-events:none;transition:opacity .2s;z-index:90}
+.detail-mask.show{opacity:1;pointer-events:auto}
+.detail-panel{position:fixed;top:0;right:0;bottom:0;width:min(440px,92vw);background:var(--panel);border-left:1px solid var(--border);box-shadow:-8px 0 30px rgba(0,0,0,.12);transform:translateX(103%);transition:transform .25s cubic-bezier(.2,.8,.2,1);z-index:100;display:flex;flex-direction:column}
+.detail-panel.show{transform:none}
+.panel-head{display:flex;align-items:center;justify-content:space-between;padding:15px 18px;border-bottom:1px solid var(--border);flex:none}
+.panel-cat{font-size:12px;color:var(--faint)}
+.panel-close{width:34px;height:34px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:15px;color:var(--muted);background:var(--border-soft);cursor:pointer;transition:color .15s,background .15s}
+.panel-close:hover{color:var(--text);background:var(--hover)}
+.panel-body{flex:1;overflow-y:auto;padding:20px 22px 28px}
+.panel-head-main{display:flex;align-items:center;gap:14px;margin-bottom:18px}
+.panel-icon{width:54px;height:54px;border-radius:12px;overflow:hidden;background:var(--border-soft);display:flex;align-items:center;justify-content:center;font-size:23px;font-weight:700;color:#fff;flex:none}
+.panel-icon img{width:100%;height:100%;object-fit:contain;display:block}
+.panel-icon .letter{width:100%;height:100%;display:flex;align-items:center;justify-content:center}
+.panel-title{flex:1;min-width:0}
+.panel-name{font-size:19px;font-weight:700;line-height:1.3}
+.panel-desc{font-size:13.5px;color:var(--muted);line-height:1.55;margin-top:5px}
+.panel-fields{border-top:1px dashed var(--border);padding-top:12px}
+.detail-row{display:flex;gap:10px;padding:6px 0;line-height:1.5;color:var(--text)}
+.detail-row .k{flex:none;width:76px;color:var(--faint);font-size:12.5px}
+.detail-row .v{flex:1;min-width:0;word-break:break-all}
+.detail-row .v a{color:var(--accent-text)}
+.detail-row .v a:hover{text-decoration:underline}
+.detail-links{display:flex;flex-wrap:wrap;gap:6px}
+.detail-links a{font-size:12px;color:var(--accent-text);background:var(--accent-soft);padding:4px 9px;border-radius:6px}
+.detail-links a:hover{background:#e0e7ff}
+[data-theme="dark"] .detail-links a:hover{background:#2c2f45}
+.panel-dl{margin-top:16px;display:flex;flex-wrap:wrap;gap:8px}
+.panel-dl a{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:600;color:var(--accent-text);background:var(--accent-soft);padding:8px 14px;border-radius:8px;transition:background .15s}
+.panel-dl a:hover{background:#e0e7ff}
+[data-theme="dark"] .panel-dl a:hover{background:#2c2f45}
+
+/* ===== 搜索视图 ===== */
+.search-tag{font-size:11px;color:var(--accent-text);background:var(--accent-soft);padding:2px 8px;border-radius:5px;flex:none;white-space:nowrap}
+.empty{text-align:center;padding:70px 20px;color:var(--muted);font-size:14px}
+.empty svg{width:44px;height:44px;color:var(--faint);margin:0 auto 14px;display:block}
+.empty .hint{font-size:12.5px;color:var(--faint);margin-top:8px}
+
+/* ===== 遮罩 ===== */
+.backdrop{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:35;opacity:0;pointer-events:none;transition:opacity .25s}
+.backdrop.show{opacity:1;pointer-events:auto}
+
+/* ===== 响应式 ===== */
+@media (max-width:1299px) and (min-width:1024px){
+  .grid{grid-template-columns:repeat(auto-fill,minmax(240px,1fr))}
+}
+@media (max-width:1023px){
+  .sidebar{transform:translateX(-100%);box-shadow:0 0 40px rgba(0,0,0,.2)}
+  .sidebar.show{transform:none}
+  .main-wrap{margin-left:0}
+  .burger{display:flex;width:44px;height:44px}
+  .theme-btn{width:44px;height:44px}
+  .search-box input{font-size:16px}
+  .content{padding:16px 16px 50px}
+  .search-box{max-width:none}
+}
+@media (max-width:560px){
+  .topbar{padding:0 12px;gap:8px}
+  .crumb{font-size:12px}
+  .grid{grid-template-columns:repeat(2,1fr);gap:10px}
+  .grid:has(> .card:last-child:nth-child(2n+1)) .card:last-child{grid-column:span 2}
+  .grid:has(> .card:last-child:nth-child(2n+1)) .card:last-child{grid-column:span 2}
+  .card{padding:12px}
+  .nav-item{padding:11px 10px;font-size:14px}
+  .nav-item .cat-count{font-size:12px}
+  .dl-btn{padding:8px 14px;font-size:13px}
+}
+</style>
+</head>
+<body>
+
+<!-- 遮罩 -->
+<div class="backdrop" id="backdrop"></div>
+
+<!-- 侧边栏 -->
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-logo">
+    <div class="logo-mark">软</div>
+    <div class="logo-text">软件清单导航</div>
+  </div>
+  <nav class="sidebar-nav" id="catNav">
+    <div class="nav-title">分类</div>
+    <!-- 分类树渲染于此 -->
+  </nav>
+  <div class="sidebar-foot">
+    数据：软件清单.csv<br>改一行 CSV 即更新
+  </div>
+</aside>
+
+<!-- 详情侧滑面板 -->
+<div class="detail-mask" id="detailMask"></div>
+<aside class="detail-panel" id="detailPanel" role="dialog" aria-hidden="true">
+  <div class="panel-head">
+    <span class="panel-cat" id="panelCat"></span>
+    <button class="panel-close" id="panelClose" aria-label="关闭详情">✕</button>
+  </div>
+  <div class="panel-body" id="panelBody"></div>
+</aside>
+
+<!-- 主区域 -->
+<div class="main-wrap">
+  <header class="topbar">
+    <button class="burger" id="burger" aria-label="打开分类">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+    </button>
+    <div class="crumb" id="crumb"><b>软件清单</b></div>
+    <div class="search-box">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+      <input id="searchInput" type="search" placeholder="搜索软件名称、用途、厂商…" autocomplete="off">
+      <button class="search-clear" id="searchClear" aria-label="清除">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" width="14" height="14"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <button class="theme-btn" id="themeBtn" aria-label="切换主题"></button>
+  </header>
+
+  <main class="content">
+    <div class="page-head" id="pageHead">
+      <h1 id="pageTitle">办公效率</h1>
+      <span class="stat" id="pageStat"></span>
+    </div>
+    <div class="grid" id="grid"><!-- 软件卡片渲染于此 --></div>
+  </main>
+</div>
+
+<script>
+/* =========================================================
+ * 软件清单导航：fetch CSV → PapaParse → 渲染分类树与卡片
+ * =======================================================*/
+(function () {
+  'use strict';
+
+  var CSV_URL = '软件清单.csv';
+  var allRows = [];        // 全部记录
+  var catMap = {};         // 分类名 -> 记录数组
+  var catOrder = [];       // 分类顺序
+  var currentCat = null;   // 当前选中分类（null=搜索视图）
+  var searchTerm = '';
+
+  var $ = function (id) { return document.getElementById(id); };
+  var grid = $('grid'), catNav = $('catNav'), crumb = $('crumb');
+  var pageTitle = $('pageTitle'), pageStat = $('pageStat');
+
+  /* ---------- 工具 ---------- */
+  function esc(s) {
+    return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+  function isSafeUrl(u) {
+    return /^https?:\/\//i.test(String(u || '').trim());
+  }
+  function firstUrl(row) {
+    var u = row['下载地址1'] || row['官网'] || '';
+    return isSafeUrl(u) ? u : null;
+  }
+  function domainOf(row) {
+    var u = row['官网'] || row['下载地址1'] || '';
+    try { return new URL(u).hostname.replace(/^www\./, ''); } catch (e) { return ''; }
+  }
+  /* 名字 → 稳定的柔和底色 */
+  var LETTER_COLORS = ['#6366f1', '#8b5cf6', '#0ea5e9', '#10b981', '#f59e0b', '#ef4444', '#ec4899', '#14b8a6', '#f97316', '#64748b'];
+  function letterColor(name) {
+    var h = 0;
+    for (var i = 0; i < name.length; i++) h = (h * 31 + name.charCodeAt(i)) >>> 0;
+    return LETTER_COLORS[h % LETTER_COLORS.length];
+  }
+  function initialOf(name) { return (name || '?').trim().charAt(0).toUpperCase(); }
+
+  /* 图标：CSV图标列 → 网站 favicon → Google favicon → 首字母色块（逐级降级） */
+  function iconHTML(row) {
+    var d = domainOf(row);
+    var tries = [];
+    if (row['图标']) tries.push(row['图标']);
+    if (d) {
+      tries.push('https://' + d + '/favicon.ico');
+      tries.push('https://www.google.com/s2/favicons?domain=' + encodeURIComponent(d) + '&sz=64');
+    }
+    if (!tries.length) {
+      return '<div class="card-icon"><div class="letter" style="background:' + letterColor(row['软件名称']) + '">' + esc(initialOf(row['软件名称'])) + '</div></div>';
+    }
+    return '<div class="card-icon" data-tries="' + esc(JSON.stringify(tries)) + '" data-name="' + esc(row['软件名称']) + '"></div>';
+  }
+
+  function bindIcons(scope) {
+    (scope || document).querySelectorAll('.card-icon[data-tries], .panel-icon[data-tries]').forEach(function (el) {
+      if (el.getAttribute('data-bound')) return;
+      el.setAttribute('data-bound', '1');
+      var tries = [];
+      try { tries = JSON.parse(el.getAttribute('data-tries') || '[]'); } catch (e) {}
+      var name = el.getAttribute('data-name') || '?';
+      var i = 0;
+      function showLetter() {
+        var d = document.createElement('div');
+        d.className = 'letter';
+        d.style.background = letterColor(name);
+        d.textContent = initialOf(name);
+        el.innerHTML = '';
+        el.appendChild(d);
+      }
+      function next() {
+        if (i >= tries.length) { showLetter(); return; }
+        var img = new Image();
+        img.onload = function () {
+          el.innerHTML = '';
+          img.style.width = '100%'; img.style.height = '100%'; img.style.objectFit = 'contain';
+          el.appendChild(img);
+        };
+        img.onerror = function () { i++; next(); };
+        img.src = tries[i++];
+      }
+      next();
+    });
+  }
+
+  /* ---------- 分类树 ---------- */
+  function renderTree() {
+    var h = '<div class="nav-title">分类</div>';
+    catOrder.forEach(function (c) {
+      var n = catMap[c].length;
+      h += '<button class="nav-item' + (currentCat === c && !searchTerm ? ' active' : '') +
+        '" data-cat="' + esc(c) + '"><span class="cat-icon">' + esc(c.match(/\p{Extended_Pictographic}/u) ? c.match(/\p{Extended_Pictographic}/u)[0] : '') +
+        '</span><span class="cat-name">' + esc(c.replace(/^\S+\s*/, '')) + '</span><span class="cat-count">' + n + '</span></button>';
+    });
+    catNav.innerHTML = h;
+    catNav.querySelectorAll('.nav-item').forEach(function (el) {
+      el.addEventListener('click', function () {
+        selectCat(el.getAttribute('data-cat'));
+      });
+    });
+  }
+
+  /* ---------- 渲染 ---------- */
+  function renderAll() {
+    renderTree();
+    if (searchTerm) { renderSearch(); return; }
+    renderCat(currentCat || catOrder[0]);
+  }
+
+  function renderCat(cat) {
+    currentCat = cat;
+    var rows = catMap[cat] || [];
+    pageTitle.textContent = cat.replace(/^\S+\s*/, '');
+    pageStat.textContent = catOrder.length + ' 个分类 · ' + allRows.length + ' 款软件 · 本类 ' + rows.length + ' 款';
+    crumb.innerHTML = '<b>软件清单</b> / ' + esc(cat.replace(/^\S+\s*/, ''));
+    grid.innerHTML = rows.map(cardHTML).join('');
+    bindCards();
+    document.querySelectorAll('#catNav .nav-item').forEach(function (el) {
+      el.classList.toggle('active', el.getAttribute('data-cat') === cat);
+    });
+    closeSidebar();
+  }
+
+  function renderSearch() {
+    pageTitle.textContent = '搜索结果';
+    pageStat.textContent = '关键词「' + searchTerm + '」匹配 ' + filtered().length + ' 款软件';
+    crumb.innerHTML = '<b>软件清单</b> / 搜索';
+    var rows = filtered();
+    if (!rows.length) {
+      grid.innerHTML = '<div class="empty" style="grid-column:1/-1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>没有找到匹配的软件<div class="hint">换个关键词试试，或检查 CSV 数据</div></div>';
+      return;
+    }
+    grid.innerHTML = rows.map(function (r) {
+      return '<div class="card" data-name="' + esc(r['软件名称']) + '">' +
+        '<div class="card-top">' + iconHTML(r) +
+        '<span class="app-name" title="点击查看详情">' + esc(r['软件名称']) + '</span>' +
+        '<span class="search-tag">' + esc(r['分类'].replace(/^\S+\s*/, '')) + '</span></div>' +
+        '<div class="card-desc">' + esc(r['用途说明'] || '暂无说明') + '</div>' +
+        dlHTML(r) + '</div>';
+    }).join('');
+    bindCards();
+  }
+
+  function filtered() {
+    var q = searchTerm.toLowerCase();
+    return allRows.filter(function (r) {
+      return (r['软件名称'] + ' ' + (r['用途说明'] || '') + ' ' + (r['厂商'] || '') + ' ' + r['分类'])
+        .toLowerCase().indexOf(q) >= 0;
+    });
+  }
+
+  /* ---------- 卡片 ---------- */
+  function cardHTML(r) {
+    var prio = r['优先级'] === '必备' ? '<span class="card-prio must">必备</span>' : '';
+    return '<div class="card" data-name="' + esc(r['软件名称']) + '">' +
+      '<div class="card-top">' + iconHTML(r) +
+      '<span class="app-name" title="点击查看详情">' + esc(r['软件名称']) + '</span></div>' +
+      '<div class="card-desc">' + esc(r['用途说明'] || '暂无说明') + '</div>' +
+      '<div class="card-dl">' + dlHTML(r) + prio + '</div>' +
+      '</div>';
+  }
+
+  function dlHTML(r) {
+    var u1 = firstUrl(r);
+    var extra = '';
+    if (r['下载地址2']) extra = '<span class="more-dl">+备用地址</span>';
+    if (!u1) return '<span class="more-dl">待补充下载地址</span>';
+    return '<a class="dl-btn" href="' + esc(u1) + '" target="_blank" rel="noopener nofollow" data-dl="1">' +
+      '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0 4-4m-4 4-4-4M4 21h16"/></svg>下载</a>' + extra;
+  }
+
+  /* 详情侧滑面板内容：大图标 + 名称 + 说明 + CSV 全部字段 + 下载地址 */
+  function panelHTML(r) {
+    var tries = [];
+    if (r['图标']) tries.push(r['图标']);
+    var d = domainOf(r);
+    if (d) {
+      tries.push('https://' + d + '/favicon.ico');
+      tries.push('https://www.google.com/s2/favicons?domain=' + encodeURIComponent(d) + '&sz=64');
+    }
+    var ic;
+    if (tries.length) {
+      ic = '<div class="panel-icon" data-tries="' + esc(JSON.stringify(tries)) + '" data-name="' + esc(r['软件名称']) + '"></div>';
+    } else {
+      ic = '<div class="panel-icon"><div class="letter" style="background:' + letterColor(r['软件名称']) + '">' + esc(initialOf(r['软件名称'])) + '</div></div>';
+    }
+    var h = '<div class="panel-head-main">' + ic +
+      '<div class="panel-title">' +
+      '<div class="panel-name">' + esc(r['软件名称']) + '</div>' +
+      '<div class="panel-desc">' + esc(r['用途说明'] || '暂无说明') + '</div>' +
+      '</div></div>';
+    var fields = [
+      ['分类', r['分类']], ['版本', r['版本']], ['厂商', r['厂商']], ['安装方式', r['安装方式']],
+      ['优先级', r['优先级']], ['官网', r['官网']], ['备注', r['备注']]
+    ];
+    h += '<div class="panel-fields">';
+    fields.forEach(function (f) {
+      if (!f[1]) return;
+      var v = f[1];
+      if (f[0] === '官网' && isSafeUrl(v)) v = '<a href="' + esc(v) + '" target="_blank" rel="noopener nofollow">' + esc(v) + '</a>';
+      h += '<div class="detail-row"><span class="k">' + f[0] + '</span><span class="v">' + v + '</span></div>';
+    });
+    var dl = [];
+    ['下载地址1', '下载地址2', '下载地址3'].forEach(function (key, i) {
+      if (isSafeUrl(r[key])) {
+        dl.push('<a href="' + esc(r[key]) + '" target="_blank" rel="noopener nofollow">下载地址' + (i + 1) + '</a>');
+      }
+    });
+    if (dl.length) {
+      h += '<div class="panel-dl">' + dl.join('') + '</div>';
+    }
+    h += '</div>';
+    return h;
+  }
+
+  function openPanel(name) {
+    var r = allRows.filter(function (x) { return x['软件名称'] === name; })[0];
+    if (!r) return;
+    $('panelBody').innerHTML = panelHTML(r);
+    bindIcons($('panelBody'));
+    $('panelCat').textContent = (r['分类'] || '').replace(/^\S+\s*/, '');
+    $('detailMask').classList.add('show');
+    $('detailPanel').classList.add('show');
+    $('detailPanel').setAttribute('aria-hidden', 'false');
+  }
+  function closePanel() {
+    $('detailMask').classList.remove('show');
+    $('detailPanel').classList.remove('show');
+    $('detailPanel').setAttribute('aria-hidden', 'true');
+  }
+  $('panelClose').addEventListener('click', closePanel);
+  $('detailMask').addEventListener('click', closePanel);
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') closePanel();
+  });
+
+  function bindCards() {
+    bindIcons(grid);
+    grid.querySelectorAll('.card').forEach(function (card) {
+      card.querySelector('.app-name').addEventListener('click', function () {
+        openPanel(card.getAttribute('data-name'));
+      });
+      card.querySelectorAll('.dl-btn').forEach(function (a) {
+        a.addEventListener('click', function (ev) { ev.stopPropagation(); });
+      });
+    });
+  }
+
+  /* ---------- 交互 ---------- */
+  function selectCat(cat) {
+    searchTerm = '';
+    $('searchInput').value = '';
+    $('searchClear').style.display = 'none';
+    renderCat(cat);
+  }
+  function closeSidebar() {
+    $('sidebar').classList.remove('show');
+    $('backdrop').classList.remove('show');
+  }
+  $('burger').addEventListener('click', function () {
+    $('sidebar').classList.toggle('show');
+    $('backdrop').classList.toggle('show');
+  });
+  $('backdrop').addEventListener('click', closeSidebar);
+  $('searchInput').addEventListener('input', function () {
+    searchTerm = this.value.trim();
+    $('searchClear').style.display = searchTerm ? 'flex' : 'none';
+    renderAll();
+  });
+  $('searchClear').addEventListener('click', function () {
+    $('searchInput').value = ''; searchTerm = '';
+    this.style.display = 'none';
+    renderAll();
+  });
+
+  /* ---------- 主题 ---------- */
+  var themeBtn = $('themeBtn');
+  function applyTheme(t) {
+    document.documentElement.setAttribute('data-theme', t);
+    themeBtn.innerHTML = t === 'dark'
+      ? '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.4M12 19.1v2.4M2.5 12h2.4M19.1 12h2.4M5 5l1.7 1.7M17.3 17.3 19 19M19 5l-1.7 1.7M6.7 17.3 5 19"/></svg>'
+      : '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z"/></svg>';
+    try { localStorage.setItem('sw-theme', t); } catch (e) {}
+  }
+  themeBtn.addEventListener('click', function () {
+    applyTheme(document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+  });
+  (function () {
+    var saved = 'light';
+    try { saved = localStorage.getItem('sw-theme') || 'light'; } catch (e) {}
+    applyTheme(saved);
+  })();
+
+  /* ---------- 加载数据 ---------- */
+  function loadFailed(msg) {
+    grid.innerHTML = '<div class="empty" style="grid-column:1/-1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M12 9v4m0 4h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg>' +
+      esc(msg) + '<div class="hint">在 GitHub Pages 或本地服务下访问（python -m http.server）</div></div>';
+  }
+
+  function init() {
+    if (!window.Papa) { loadFailed('CSV 解析库加载失败，请检查网络'); return; }    fetch(CSV_URL, { cache: 'no-store' })
+      .then(function (res) {
+        if (!res.ok) throw new Error('无法读取 ' + CSV_URL + '（HTTP ' + res.status + '）');
+        return res.text();
+      })
+      .then(function (text) {
+        var parsed = Papa.parse(text, { header: true, skipEmptyLines: true });
+        if (parsed.errors && parsed.errors.length) {
+          var warn = parsed.errors.filter(function (e) { return e.type !== 'Delimiter'; });
+          if (warn.length) console.warn('CSV 解析警告', warn);
+        }
+        allRows = parsed.data.filter(function (r) { return r['软件名称'] && r['分类']; });
+        allRows.forEach(function (r) {
+          var c = r['分类'];
+          if (!catMap[c]) { catMap[c] = []; catOrder.push(c); }
+          catMap[c].push(r);
+        });
+        renderAll();
+        if (location.hash === '#demo' && allRows.length) { openPanel(allRows[0]['软件名称']); }
+      })
+      .catch(function (err) { loadFailed(err.message); });
+  }
+  /* 等待 PapaParse（CDN 延迟加载）就绪后再启动 */
+  var bootTries = 0;
+  (function boot() {
+    if (window.Papa) { init(); return; }
+    if (bootTries++ > 50) { loadFailed('CSV 解析库加载超时，请检查网络后刷新页面'); return; }
+    setTimeout(boot, 100);
+  })();
+})();
+</script>
+</body>
+</html>
